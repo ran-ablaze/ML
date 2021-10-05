@@ -8,9 +8,9 @@ parser.add_argument("--b", type=int, default=0)
 parser.add_argument('--filename', type=str, default='testfile.txt')
 args = parser.parse_args()
 
-def count_outcome(outcomes, in_a, in_b):
-    out_a = in_a
-    out_b = in_b
+def count_outcome(outcomes):
+    out_a = 0
+    out_b = 0
     for i in outcomes:
         if i == '1':
             out_a += 1
@@ -29,8 +29,10 @@ if __name__ == '__main__':
     i = 1
     outcomes = fp.readline().strip()
     while outcomes:
-        posterior_a, posterior_b = count_outcome(outcomes, prior_a, prior_b)
-        likelihood = beta(posterior_a, posterior_b)
+        cnt_a, cnt_b = count_outcome(outcomes)
+        posterior_a = prior_a + cnt_a
+        posterior_b = prior_b + cnt_b
+        likelihood = beta(cnt_a, cnt_b)
         print('case', i, ':', outcomes)
         print('Likelihood:',likelihood)
         print('Beta prior:\ta =',prior_a,'b =', prior_b)
