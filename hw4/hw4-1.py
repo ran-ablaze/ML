@@ -20,7 +20,7 @@ def Generate_data(mx, vx, my, vy, n):
     data = np.zeros((n, 2))
     for i in range(n):
         data[i, 0] = Univariate_gaussian(mx, vx)
-        data[i, 1] = Univariate_gaussian(mx, vx)
+        data[i, 1] = Univariate_gaussian(my, vy)
     return data
 
 def gradient_descent_regression(X, Y):
